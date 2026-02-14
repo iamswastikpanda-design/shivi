@@ -1,160 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Shivani❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivani ❤️</title>
 
-    h1 {
-      font-size: 38px;
-      margin-bottom: 40px;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  text-align: center;
+  color: white;
+}
 
-    .container {
-      position: relative;
-    }
+h1 {
+  margin-top: 20vh;
+  font-size: 26px;
+}
 
-    button {
-      padding: 15px 35px;
-      font-size: 20px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      position: absolute;
-      transition: 0.2s;
-    }
+button {
+  padding: 14px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  position: fixed;
+}
 
-    #yesBtn {
-      background: #ff1744;
-      left: -110px;
-    }
+#yesBtn {
+  background: #ff1744;
+  left: 30%;
+  top: 60%;
+}
 
-    #noBtn {
-      background: #444;
-      left: 110px;
-    }
+#noBtn {
+  background: #444;
+  left: 55%;
+  top: 60%;
+}
 
-    #sureBox {
-      position: fixed;
-      background: white;
-      color: black;
-      padding: 30px;
-      border-radius: 20px;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
+#popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 20px;
+  display: none;
+}
 
-    #sureBox button {
-      position: relative;
-      margin: 10px;
-      left: 0;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
-  </style>
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Shivaani 💖<br>Will You Be My Valentine?</h1>
-    <button id="yesBtn" onclick="askSure()">Yes ❤️</button>
-    <button id="noBtn">No 🙄</button>
-  </div>
+<h1>Shivani 💖<br>Will You Be My Valentine?</h1>
 
-  <div id="sureBox">
-    <h2>Are you really sure Shivaani? 😏💘</h2>
-    <button onclick="finalYes()">Yes I'm Sure ❤️</button>
-  </div>
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No 🙄</button>
 
-  <canvas id="confetti"></canvas>
+<div id="popup">
+  <h2>Are you REALLY sure Shivani? 😏</h2>
+  <button id="finalYes">Yes I'm Sure ❤️</button>
+</div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const sureBox = document.getElementById("sureBox");
+<canvas id="confetti"></canvas>
 
-    // Move No button
-    noBtn.addEventListener("mouseover", moveButton);
-    noBtn.addEventListener("click", moveButton);
+<script>
 
-    function moveButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const popup = document.getElementById("popup");
+const finalYes = document.getElementById("finalYes");
 
-    function askSure() {
-      sureBox.style.display = "flex";
-    }
+// Move NO button (works everywhere)
+function moveNo() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
 
-    function finalYes() {
-      document.body.innerHTML = `
-        <canvas id="confetti"></canvas>
-        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:#ff1744;text-align:center;padding:20px;">
-          <h1>Yesss Shivani!!! 😍💖</h1>
-          <p style="font-size:22px;">
-            Thank you for saying YES ❤️<br><br>
-            I knew you had excellent decision making skills 😌✨<br>
-            Legendary move, my Dhurandhar 😂🔥<br><br>
-            I promise to handle your drama,<br>
-            your mood swings,<br>
-            Cutieeee 😘 <br><br>
-            My cute valentine 💘
-          </p>
-        </div>
-      `;
-      startConfetti();
-    }
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
 
-    // Simple Confetti
-    function startConfetti() {
-      const canvas = document.getElementById("confetti");
-      const ctx = canvas.getContext("2d");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
 
-      const pieces = [];
-      for (let i = 0; i < 150; i++) {
-        pieces.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 10 + 5,
-          speed: Math.random() * 3 + 2,
-          color: `hsl(${Math.random()*360},100%,50%)`
-        });
-      }
+// Desktop hover
+noBtn.addEventListener("mouseover", moveNo);
 
-      function update() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
-          ctx.fillStyle = p.color;
-          ctx.fillRect(p.x, p.y, p.size, p.size);
-          p.y += p.speed;
-          if (p.y > canvas.height) p.y = 0;
-        });
-        requestAnimationFrame(update);
-      }
-      update();
-    }
-  </script>
+// Mobile tap
+noBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  moveNo();
+});
+
+// YES button
+yesBtn.addEventListener("click", function(){
+  popup.style.display = "block";
+});
+
+// FINAL YES
+finalYes.addEventListener("click", function(){
+
+  document.body.innerHTML = `
+    <canvas id="confetti"></canvas>
+    <div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:#ff1744;padding:30px;border-radius:20px;text-align:center;">
+      <h1>Yesss Shivaani 😍💖</h1>
+      <p style="font-size:18px;">
+        Thank you for saying YES ❤️<br><br>
+        I knew you had elite decision-making skills 😌✨<br>
+        Choosing me? Legendary move 😂🔥<br><br>
+        I promise to handle your drama,<br>
+        your mood swings,<br>
+        Cutieee <br><br>
+        My cute Valentine 💘
+      </p>
+    </div>
+  `;
+
+  startConfetti();
+});
+
+// Confetti
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const pieces = [];
+
+  for (let i = 0; i < 150; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 8 + 4,
+      speed: Math.random() * 3 + 2,
+      color: `hsl(${Math.random()*360},100%,50%)`
+    });
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(update);
+  }
+
+  update();
+}
+
+</script>
 
 </body>
 </html>
